@@ -1,0 +1,23 @@
+{
+  "name": "miaoxing/wechat-media",
+  "description": "Miaoxing Wechat Media Plugin",
+  "keywords": [
+    "miaoxing", "wechat", "media"
+  ],
+  "license": "MIT",
+  "require": {
+    "miaoxing/app": "dev-master@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Miaoxing\\WechatMedia\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MiaoxingTest\\WechatMedia\\": "tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
