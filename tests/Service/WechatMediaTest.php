@@ -22,7 +22,7 @@ class WechatMediaTest extends \Miaoxing\Plugin\Test\BaseTestCase
     {
         $ret = wei()->wechatMedia->generateApiData([
             'type' => WechatMedia::TYPE_TEXT,
-            'content' => 'text'
+            'content' => 'text',
         ]);
 
         $this->assertEquals('text', $ret['data']['text']['content']);
