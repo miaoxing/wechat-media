@@ -11,7 +11,7 @@ class V20170328201023CreateWechatMediasTable extends BaseMigration
      */
     public function up()
     {
-//        $this->schema->table('wechatMedias')
+        //        $this->schema->table('wechatMedias')
 //            ->id()
 //            ->int('appId')
 //            ->string('wechatMediaId', 128)
