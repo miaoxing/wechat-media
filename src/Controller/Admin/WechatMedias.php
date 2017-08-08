@@ -24,7 +24,7 @@ class WechatMedias extends BaseController
         }
 
         return $this->suc([
-            'url' => $http['url']
+            'url' => $http['url'],
         ]);
     }
 }
