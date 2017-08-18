@@ -6,25 +6,15 @@ use miaoxing\plugin\BaseController;
 
 class WechatMedias extends BaseController
 {
-    public function uploadImgAction($req)
+    /**
+     * 将外部图片地址映射到微信图片地址
+     */
+    public function createAction($req)
     {
-        $upload = wei()->upload;
-        $result = $upload();
-        if (!$result) {
-            return $this->err($upload->getFirstMessage('上传文件'));
-        }
-
-        $file = $upload->getFile();
-        $account = wei()->wechatAccount->getCurrentAccount();
-        $api = $account->createApiService();
-
-        $http = $api->uploadImg($file);
-        if (!$http) {
-            return $api->getResult();
-        }
+        $wechatUrl = wei()->wechatMedia->updateUrlToWechatUrl($req['url']);
 
         return $this->suc([
-            'url' => $http['url'],
+            'url' => $wechatUrl,
         ]);
     }
 }
