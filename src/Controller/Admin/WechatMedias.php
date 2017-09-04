@@ -16,11 +16,11 @@ class WechatMedias extends BaseController
             // 如果传 $req 会导致调用 getUrl 而一直有值
             'data' => $req->getParameterReference('post'),
             'rules' => [
-                'url' => []
+                'url' => [],
             ],
             'names' => [
-                'url' => 'Url'
-            ]
+                'url' => 'Url',
+            ],
         ]);
         if (!$validator->isValid()) {
             return $this->err($validator->getFirstMessage());
