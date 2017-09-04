@@ -261,6 +261,20 @@ class WechatMedia extends \miaoxing\plugin\BaseModel
     }
 
     /**
+     * @param string $url
+     * @return array
+     * @todo 迁移updateUrlToWechatUrl
+     */
+    public function updateUrlToWechatUrlRet($url)
+    {
+        try {
+            return $this->suc(['url' => $this->updateUrlToWechatUrl($url)]);
+        } catch (\Exception $e) {
+            return $this->err($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * 生成资源的图文路径
      *
      * @param array $articles

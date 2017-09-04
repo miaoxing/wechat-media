@@ -26,10 +26,8 @@ class WechatMedias extends BaseController
             return $this->err($validator->getFirstMessage());
         }
 
-        $wechatUrl = wei()->wechatMedia->updateUrlToWechatUrl($req['url']);
+        $ret = wei()->wechatMedia->updateUrlToWechatUrlRet($req['url']);
 
-        return $this->suc([
-            'url' => $wechatUrl,
-        ]);
+        return $ret;
     }
 }
