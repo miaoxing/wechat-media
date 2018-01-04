@@ -7,7 +7,7 @@ use Miaoxing\Article\Service\Article;
 /**
  * @property \Wei\Logger $logger
  */
-class WechatMedia extends \miaoxing\plugin\BaseModel
+class WechatMedia extends \Miaoxing\Plugin\BaseModel
 {
     const TYPE_ARTICLE = 10;
 
