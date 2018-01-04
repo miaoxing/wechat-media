@@ -2,7 +2,7 @@
 
 namespace Miaoxing\WechatMedia\Controller\Admin;
 
-use miaoxing\plugin\BaseController;
+use Miaoxing\Plugin\BaseController;
 use Wei\Request;
 
 class WechatMedias extends BaseController
