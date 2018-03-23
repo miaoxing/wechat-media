@@ -30,4 +30,20 @@ class WechatMedias extends BaseController
 
         return $ret;
     }
+
+    public function uploadImageAction()
+    {
+        $ret = wei()->file->uploadImage();
+        if ($ret['code'] !== 1) {
+            return $ret;
+        }
+
+        $pathRet = wei()->wechatMedia->findOrCreateByPath($ret['url']);
+        if ($pathRet['code'] !== 1) {
+            return $pathRet;
+        }
+
+        // 返回上传结果，其中包括了文件地址
+        return $ret;
+    }
 }

@@ -311,6 +311,33 @@ class WechatMedia extends \Miaoxing\Plugin\BaseModel
         ];
     }
 
+    public function findOrCreateByPath($path)
+    {
+        $media = $this->findOrInit(['path' => $path]);
+        if (!$media->isNew) {
+            return $media;
+        }
+
+        $ret = $this->downloadFile($path);
+        if ($ret['code'] !== 1) {
+            return $ret;
+        }
+
+        $api = wei()->wechatAccount->getCurrentAccount()->createApiService();
+        $ret = $api->addMaterial('image', $ret['file']);
+        if ($ret['code'] !== 1) {
+            return $ret;
+        }
+
+        $media->setAppId()->save([
+            'type' => static::TYPE_IMAGE,
+            'wechatMediaId' => $ret['media_id'],
+            'wechatUrl' => $ret['url'],
+        ]);
+
+        return $this->suc(['data' => $media]);
+    }
+
     public function afterSave()
     {
         parent::afterSave();
@@ -321,5 +348,27 @@ class WechatMedia extends \Miaoxing\Plugin\BaseModel
     {
         parent::afterDestroy();
         $this->cache->remove($this->cachePrefix . $this['path']);
+    }
+
+    /**
+     * @param string $url
+     * @return array
+     */
+    protected function downloadFile($url)
+    {
+        $parts = parse_url($url);
+        if (isset($parts['host'])) {
+            $file = wei()->cdn->download($url);
+            if (!$file) {
+                return $this->err('下载远程文件失败,请稍后再试');
+            }
+        } else {
+            $file = ltrim($url, '/');
+            if (!is_file($file)) {
+                return $this->err(['图片文件不存在,地址是:%s', $url], -2);
+            }
+        }
+
+        return $this->suc(['file' => $file]);
     }
 }
