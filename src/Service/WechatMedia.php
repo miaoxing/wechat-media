@@ -315,7 +315,7 @@ class WechatMedia extends \Miaoxing\Plugin\BaseModel
     {
         $media = $this->findOrInit(['path' => $path]);
         if (!$media->isNew) {
-            return $media;
+            return $this->suc(['data' => $media]);
         }
 
         $ret = $this->downloadFile($path);
